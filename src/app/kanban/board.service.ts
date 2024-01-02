@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { arrayRemove, writeBatch } from "firebase/firestore";
 import { switchMap, map } from 'rxjs/operators';
 import { Board, Task } from './board.model';
+import { User } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +63,7 @@ export class BoardService {
    */
   getUserBoards() {
     return this.afAuth.authState.pipe(
-      switchMap(user => {
+      switchMap((user: any) => {
         if (user) {
           return this.db
             .collection<Board>('boards', ref =>

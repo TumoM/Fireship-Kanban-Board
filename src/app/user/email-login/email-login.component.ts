@@ -1,41 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth'
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Component({
   selector: 'app-email-login',
   templateUrl: './email-login.component.html',
-  styleUrls: ['./email-login.component.scss']
+  styleUrls: ['./email-login.component.scss'],
 })
 export class EmailLoginComponent implements OnInit {
-
   form!: FormGroup;
   type: 'login' | 'signup' | 'reset' = 'signup';
-  loading: boolean = false
+  loading: boolean = false;
 
   serverMessage: string = '';
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) { }
+  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.minLength(6), Validators.required]],
-      passwordConfirm: ['', []]
-    })
+      passwordConfirm: ['', []],
+    });
   }
 
   changeType(val: 'login' | 'signup' | 'reset') {
-    this.type = val
+    this.type = val;
   }
 
   get isLogin() {
-    return this.type === 'login'
+    return this.type === 'login';
   }
   get isSignup() {
-    return this.type === 'signup'
+    return this.type === 'signup';
   }
   get isPasswordReset() {
-    return this.type === 'reset'
+    return this.type === 'reset';
   }
 
   get email() {
@@ -53,8 +52,7 @@ export class EmailLoginComponent implements OnInit {
   get passwordDoesMatch() {
     if (this.type !== 'signup') {
       return true;
-    }
-    else {
+    } else {
       return this.password?.value === this.passwordConfirm?.value;
     }
   }
@@ -68,11 +66,9 @@ export class EmailLoginComponent implements OnInit {
     try {
       if (this.isLogin) {
         await this.afAuth.signInWithEmailAndPassword(email, password);
-      }
-      else if (this.isSignup) {
+      } else if (this.isSignup) {
         await this.afAuth.createUserWithEmailAndPassword(email, password);
-      }
-      else if (this.isPasswordReset) {
+      } else if (this.isPasswordReset) {
         await this.afAuth.sendPasswordResetEmail(email);
         this.serverMessage = 'Check your email';
       }
@@ -81,5 +77,4 @@ export class EmailLoginComponent implements OnInit {
     }
     this.loading = false;
   }
-
 }

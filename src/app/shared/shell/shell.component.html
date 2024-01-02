@@ -6,7 +6,7 @@
             <a mat-list-item routerLink="/" (click)="drawer.close()">Home</a>
             <a mat-list-item routerLink="/login" (click)="drawer.close()">Login</a>
             <a mat-list-item routerLink="/kanban" (click)="drawer.close()">Kanban Demo</a>
-            <a mat-list-item routerLink="/customer" (click)="drawer.close()">SSR Demo</a>
+            <!-- <a mat-list-item routerLink="/customer" (click)="drawer.close()">SSR Demo</a> -->
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -21,14 +21,14 @@
             <span class="fill-space"></span>
             <div *ngIf="!(isHandset$ | async)">
                 <a mat-button routerLink="/kanban">🏗 Kanban Demo</a>
-                <a mat-button routerLink="/customers">⚡ SSR Demo</a>
+                <!-- <a mat-button routerLink="/customers">⚡ SSR Demo</a> -->
                 <a mat-button routerLink="/login">🔑 Login</a>
             </div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
-            </button>
+            </button> -->
 
-            <mat-menu #menu="matMenu">
+            <!-- <mat-menu #menu="matMenu">
                 <a mat-menu-item href="">
                     <i>💬</i>
                     <span>Chat on Slack</span>
@@ -45,7 +45,7 @@
                     <i>📺</i>
                     <span>Watch on YouTube</span>
                 </a>
-            </mat-menu>
+            </mat-menu> -->
         </mat-toolbar>
 
         <ng-content></ng-content>
